@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>타자기</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #f2f2f2;
+      padding: 40px;
+      text-align: center;
+    }
+
+    #output {
+      width: 600px;
+      height: 60px;
+      font-size: 24px;
+      padding: 10px;
+      border: 3px solid #444;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      background: #fff;
+      box-shadow: inset 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .keyboard {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .row {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .key {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: all 0.1s ease;
+    }
+
+    .key:active {
+      transform: scale(0.95);
+      background-color: #222 !important;
+      color: #fff;
+    }
+
+    .row1 .key { background-color: #cde1f9; }  /* 숫자 줄 */
+    .row2 .key { background-color: #ffdfdf; }  /* QWERTY 줄 */
+    .row3 .key { background-color: #d5fdd5; }  /* ASDFG 줄 */
+    .row4 .key { background-color: #ffe7b3; }  /* ZXCV 줄 */
+
+    .backspace {
+      background-color: #999 !important;
+      color: white;
+      width: 80px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>타자기</h1>
+  <input type="text" id="output" placeholder="클릭하여 입력하세요" readonly />
+
+  <div class="keyboard">
+    <div class="row row1">
+      <div class="key">1</div><div class="key">2</div><div class="key">3</div>
+      <div class="key">4</div><div class="key">5</div><div class="key">6</div>
+      <div class="key">7</div><div class="key">8</div><div class="key">9</div><div class="key">0</div>
+    </div>
+    <div class="row row2">
+      <div class="key">Q</div><div class="key">W</div><div class="key">E</div>
+      <div class="key">R</div><div class="key">T</div><div class="key">Y</div>
+      <div class="key">U</div><div class="key">I</div><div class="key">O</div><div class="key">P</div>
+    </div>
+    <div class="row row3">
+      <div class="key">A</div><div class="key">S</div><div class="key">D</div>
+      <div class="key">F</div><div class="key">G</div><div class="key">H</div>
+      <div class="key">J</div><div class="key">K</div><div class="key">L</div>
+    </div>
+    <div class="row row4">
+      <div class="key">Z</div><div class="key">X</div><div class="key">C</div>
+      <div class="key">V</div><div class="key">B</div><div class="key">N</div><div class="key">M</div>
+      <div class="key backspace" data-action="backspace">⌫</div>
+    </div>
+  </div>
+
+  <script>
+    const output = document.getElementById("output");
+    const keys = document.querySelectorAll(".key");
+
+    keys.forEach(key => {
+      key.addEventListener("click", () => {
+        const action = key.dataset.action;
+        if (action === "backspace") {
+          output.value = output.value.slice(0, -1);
+        } else {
+          output.value += key.textContent;
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
